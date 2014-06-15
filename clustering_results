@@ -1,0 +1,82 @@
+cluster results for body in boilerplate
+
+
+ For Centroid  0  keywords are  [u'add' u'onion' u'oil' u'cup' u'pepper' u'sauc' u'chees' u'cook'
+ u'chicken' u'recip']
+
+ For Centroid  1  keywords are  [u'garlic' u'add' u'basil' u'oregano' u'chop' u'chicken' u'tomato' u'soup'
+ u'spinach' u'orzo']
+
+ For Centroid  2  keywords are  [u'chocol' u'flour' u'cupcak' u'cream' u'butter' u'recip' u'bake' u'sugar'
+ u'cake' u'cup']
+
+ For Centroid  3  keywords are  [u'health' u'use' u'fashion' u'new' u'video' u'sport' u'like' u'ha' u'food'
+ u'wa']
+
+ For Centroid  4  keywords are  [u'pad' u'left' u'float' u'margin' u'align' u'font' u'text' u'height'
+ u'width' u'px']
+
+ For Centroid  5  keywords are  [u'browni' u'recip' u'sugar' u'chip' u'bake' u'peanut' u'cup' u'butter'
+ u'chocol' u'cooki']
+
+ For Centroid  6  keywords are  [u'sweet' u'squar' u'cup' u'cornmeal' u'flour' u'honey' u'bake' u'butter'
+ u'bread' u'corn']
+
+ For Centroid  7  keywords are  [u'lemonad' u'make' u'orang' u'peel' u'cup' u'sugar' u'marmalad' u'recip'
+ u'curd' u'grapefruit']
+
+ For Centroid  8  keywords are  [u'celebr' u'uk' u'charact' u'movi' u'inspir' u'royal' u'palac' u'fairi'
+ u'princess' u'disney']
+
+ For Centroid  9  keywords are  [u'stop' u'plu' u'ant' u'motion' u'al' u'se' u'sur' u'el' u'la' u'en']
+
+ For Centroid  10  keywords are  [u'recip' u'live' u'vegan' u'chef' u'culinari' u'cdc' u'diet' u'milk'
+ u'food' u'raw']
+
+ For Centroid  11  keywords are  [u'meme' u'random' u'joke' u'comic' u'imag' u'humor' u'video' u'pic'
+ u'pictur' u'funni']
+
+
+ cluster results for keywords in boilerplate
+
+  For Centroid  0  keywords are  [u'html' u'video' u'epic' u'troll' u'zn' u'melatonin' u'ro' u'combo' u'fr'
+ u'se']
+
+ For Centroid  1  keywords are  [u'health' u'chocol' u'video' u'news' u'uk' u'food' u'index' u'articl'
+ u'recip' u'html']
+
+ For Centroid  2  keywords are  [u'world' u'bear' u'stick' u'giant' u'apr' u'worm' u'largest' u'gummi'
+ u'vat' u'dvd']
+
+ For Centroid  3  keywords are  [u'archiv' u'sport' u'cake' u'make' u'way' u'html' u'famili' u'babbl'
+ u'kitchen' u'blog']
+
+ For Centroid  4  keywords are  [u'game' u'combin' u'bell' u'blog' u'recip' u'xlv' u'dip' u'simpl' u'bowl'
+ u'super']
+
+ For Centroid  5  keywords are  [u'style' u'street' u'gazett' u'sunglass' u'fashion' u'allig' u'commun'
+ u'blog' u'good' u'post']
+
+
+
+ cluster results for title in boilerplate
+
+
+
+  For Centroid  0  keywords are  [u'flesh' u'flaw' u'flavour' u'flavor' u'flatul' u'fuck' u'face' u'card'
+ u'basebal' u'billi']
+
+ For Centroid  1  keywords are  [u'brooklyn' u'decker' u'check' u'photo' u'edit' u'collect' u'si' u'sport'
+ u'illustr' u'swimsuit']
+
+ For Centroid  2  keywords are  [u'footbal' u'yahoo' u'nation' u'result' u'team' u'rumor' u'news' u'stand'
+ u'score' u'sport']
+
+ For Centroid  3  keywords are  [u'chicken' u'cake' u'make' u'video' u'fashion' u'cooki' u'best' u'chocol'
+ u'food' u'recip']
+
+ For Centroid  4  keywords are  [u'fashion' u'recip' u'step' u'pain' u'week' u'day' u'pic' u'sport'
+ u'funni' u'pictur']
+
+ For Centroid  5  keywords are  [u'style' u'definit' u'health' u'visual' u'ultim' u'feel' u'tire' u'medit'
+ u'gadget' u'guid']
