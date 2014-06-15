@@ -86,6 +86,8 @@ def top10words_cluster (df,column,num_of_clusters) :
     for i in xrange(len(res.cluster_centers_)):
         words=vocab[sorted_vals[i][-10:]]
         print "\n For Centroid ",i," keywords are ", words
+    return res.labels_        
+
 
 
 # Display progress logs on stdout
@@ -93,13 +95,13 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')
 
 df = pd.read_table('data/train.tsv')
-data = df.boilerplate[0:50]
+data = df.boilerplate[0:30]
 data = data.apply(json.loads)   
 label = df.iloc[:,26]
     
-keywords  = [StringCleanUp(data[i]["url"])  if "url" in data[i] else " " for i in range(0,len(data)) ]
-bodies  = [StringCleanUp(data[i]["body"])  if "url" in data[i] else " " for i in range(0,len(data)) ]
-titles  = [StringCleanUp(data[i]["title"])  if "url" in data[i] else " " for i in range(0,len(data)) ]
+keywords  = [StringCleanUp(data[i]["url"])  if "url" in data[i] else "NO DATA" for i in range(0,len(data)) ]
+bodies  = [StringCleanUp(data[i]["body"])  if "body" in data[i] else "NO DATA" for i in range(0,len(data)) ]
+titles  = [StringCleanUp(data[i]["title"])  if "title" in data[i] else "NO DATA" for i in range(0,len(data)) ]
 data=pd.DataFrame(data)
 data["bodies"]=bodies
 data["keywords"]=keywords
@@ -113,7 +115,19 @@ full_data = pd.merge(df,alc_cat,right_index=True,left_index=True)
 correlations = full_data.corr()
 correlations.label
 
-top10words_cluster(data[data["bodies"]!=" "],"bodies",10)
+data["bodyCategory"] = top10words_cluster(data,"bodies",10)
+data["keywordsCategory"] = top10words_cluster(data,"keywords",10)
+data["titlesCategory"] = top10words_cluster(data,"bodies",10)
+
+# now binarize and perform correlation with label
+temp =  pd.get_dummies(data.bodyCategory,prefix="body")
+data = pd.merge(data,temp,right_index=True,left_index=True)
+temp =  pd.get_dummies(data.keywordsCategory,prefix="keywords")
+data = pd.merge(data,temp,right_index=True,left_index=True)
+temp =  pd.get_dummies(data.titlesCategory,prefix="titles")
+data = pd.merge(data,temp,right_index=True,left_index=True)
+
+print data.corr().label
 
 ###############################################################################
 # define a pipeline combining a text feature extractor with a simple
