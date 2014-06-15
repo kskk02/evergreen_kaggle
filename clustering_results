@@ -1,0 +1,128 @@
+
+ label               1.000000
+bodyCategory        0.359796
+keywordsCategory   -0.235656
+titlesCategory     -0.317325
+body_0              0.011324
+body_1              0.011324
+body_2              0.011324
+body_3              0.143940
+body_4              0.011324
+body_5             -0.512163
+body_6             -0.021239
+body_7              0.470462
+body_8              0.051962
+body_9              0.011324
+keywords_0          0.011324
+keywords_1         -0.072915
+keywords_2          0.046177
+keywords_3          0.018415
+keywords_4          0.165939
+keywords_5          0.273437
+keywords_6          0.011324
+keywords_7         -0.033815
+keywords_8         -0.278887
+keywords_9         -0.001241
+titles_0           -0.013490
+titles_1            0.159141
+titles_2           -0.078326
+titles_3            0.129163
+titles_4            0.321945
+titles_5           -0.183110
+titles_6            0.020346
+titles_7            0.252038
+titles_8           -0.330550
+titles_9           -0.107174
+
+For Centroid  bodies   0  keywords are  [u'kg' u'flour' u'pepper' u'recip' u'make' u'cup' u'takeaway' u'super'
+ u'aussi' u'crispi' u'powder' u'channel' u'tb' u'fri' u'chicken']
+
+ For Centroid  bodies   1  keywords are  [u'pull' u'list' u'rice' u'verbena' u'week' u'cookbook' u'share' u'thing'
+ u'pie' u'good' u'coupl' u'continu' u'read' u'nettl' u'recip']
+
+ For Centroid  bodies   2  keywords are  [u'gargl' u'sore' u'photo' u'tape' u'vapor' u'throat' u'cure' u'remedi'
+ u'hiccup' u'headach' u'duct' u'md' u'effect' u'fungu' u'wart']
+
+ For Centroid  bodies   3  keywords are  [u'powder' u'add' u'batter' u'mix' u'vanilla' u'recip' u'butter' u'cream'
+ u'sugar' u'bake' u'cup' u'frost' u'chocol' u'cupcak' u'cake']
+
+ For Centroid  bodies   4  keywords are  [u'ingredi' u'mix' u'cool' u'butter' u'dough' u'egg' u'syrup' u'sheet'
+ u'bake' u'demerara' u'cinnamon' u'caster' u'cooki' u'mapl' u'sugar']
+
+ For Centroid  bodies   5  keywords are  [u'swimsuit' u'look' u'time' u'photo' u'make' u'health' u'use' u'fashion'
+ u'new' u'sport' u'like' u'ha' u'food' u'video' u'wa']
+
+ For Centroid  bodies   6  keywords are  [u'publish' u'mark' u'field' u'cancel' u'strong' u'attribut' u'html' u'em'
+ u'strike' u'code' u'acronym' u'email' u'repli' u'titl' u'cite']
+
+ For Centroid  bodies   7  keywords are  [u'egg' u'salt' u'chicken' u'make' u'add' u'sugar' u'chees' u'cooki'
+ u'minut' u'chocol' u'butter' u'cook' u'bake' u'cup' u'recip']
+
+ For Centroid  bodies   8  keywords are  [u'sugar' u'lobster' u'flour' u'chees' u'oven' u'cheddar' u'cup' u'garlic'
+ u'shortcak' u'recip' u'dough' u'strawberri' u'bake' u'butter' u'biscuit']
+
+ For Centroid  bodies   9  keywords are  [u'weekend' u'drizzl' u'husband' u'tablespoon' u'milk' u'cook' u'glaze'
+ u'cereal' u'butter' u'teaspoon' u'roll' u'cup' u'cinnamon' u'cake'
+ u'breakfast']
+
+ For Centroid  keywords   0  keywords are  [u'fingerless' u'filet' u'fine' u'finger' u'finder' u'financ' u'final'
+ u'filth' u'filmmak' u'zucchini' u'recip' u'homemad' u'free' u'summer'
+ u'popsicl']
+
+ For Centroid  keywords   1  keywords are  [u'ann' u'paint' u'brooklyn' u'decker' u'athlet' u'miller' u'bar' u'morton'
+ u'html' u'si' u'rooki' u'index' u'vault' u'model' u'swimsuit']
+
+ For Centroid  keywords   2  keywords are  [u'best' u'sushi' u'sugar' u'chees' u'blog' u'cooki' u'pizza' u'stuf'
+ u'homemad' u'dinner' u'egg' u'recip' u'html' u'cinnamon' u'roll']
+
+ For Centroid  keywords   3  keywords are  [u'chocol' u'soul' u'queen' u'age' u'sign' u'women' u'head' u'artichok'
+ u'protect' u'articl' u'cake' u'html' u'diseas' u'attack' u'heart']
+
+ For Centroid  keywords   4  keywords are  [u'dark' u'cup' u'cheesecak' u'cream' u'browni' u'cupcak' u'bar' u'cake'
+ u'recip' u'html' u'chip' u'butter' u'peanut' u'cooki' u'chocol']
+
+ For Centroid  keywords   5  keywords are  [u'cake' u'healthi' u'uk' u'dessert' u'potato' u'cook' u'easi' u'bread'
+ u'chees' u'bake' u'chicken' u'index' u'food' u'html' u'recip']
+
+ For Centroid  keywords   6  keywords are  [u'finish' u'finger' u'film' u'fingerprint' u'fingerless' u'fingernail'
+ u'articl' u'video' u'watch' u'scienc' u'current' u'sheet' u'volt'
+ u'plywood' u'meander']
+
+ For Centroid  keywords   7  keywords are  [u'tag' u'type' u'recip' u'print' u'categori' u'set' u'news' u'video'
+ u'channel' u'comic' u'page' u'stori' u'index' u'articl' u'id']
+
+ For Centroid  keywords   8  keywords are  [u'best' u'index' u'photo' u'page' u'fashion' u'food' u'data' u'health'
+ u'sport' u'uk' u'video' u'news' u'articl' u'blog' u'html']
+
+ For Centroid  keywords   9  keywords are  [u'prod' u'student' u'mode' u'main' u'drug' u'view' u'index' u'swimsuit'
+ u'miller' u'gather' u'articl' u'display' u'recip' u'id' u'action']
+
+ For Centroid  bodies   0  keywords are  [u'indi' u'header' u'rollov' u'border' u'background' u'pad' u'float'
+ u'left' u'font' u'align' u'margin' u'text' u'height' u'width' u'px']
+
+ For Centroid  bodies   1  keywords are  [u'mix' u'teaspoon' u'flour' u'vanilla' u'dough' u'browni' u'recip' u'chip'
+ u'sugar' u'peanut' u'bake' u'cup' u'butter' u'chocol' u'cooki']
+
+ For Centroid  bodies   2  keywords are  [u'captiv' u'island' u'collect' u'issu' u'galleri' u'vault' u'edit' u'suit'
+ u'sport' u'swim' u'photo' u'illustr' u'model' u'si' u'swimsuit']
+
+ For Centroid  bodies   3  keywords are  [u'powder' u'add' u'batter' u'mix' u'vanilla' u'recip' u'butter' u'sugar'
+ u'cream' u'bake' u'cup' u'frost' u'chocol' u'cupcak' u'cake']
+
+ For Centroid  bodies   4  keywords are  [u'tomato' u'salt' u'garlic' u'minut' u'add' u'potato' u'oil' u'onion'
+ u'cup' u'pepper' u'sauc' u'chees' u'cook' u'chicken' u'recip']
+
+ For Centroid  bodies   5  keywords are  [u'vintag' u'jean' u'model' u'inspir' u'trend' u'shop' u'beauti' u'wear'
+ u'look' u'cloth' u'shoe' u'style' u'design' u'dress' u'fashion']
+
+ For Centroid  bodies   6  keywords are  [u'weight' u'diseas' u'cancer' u'healthi' u'brain' u'help' u'studi' u'diet'
+ u'peopl' u'eat' u'exercis' u'sleep' u'bodi' u'food' u'health']
+
+ For Centroid  bodies   7  keywords are  [u'mixtur' u'chocol' u'pie' u'egg' u'make' u'pan' u'minut' u'cream'
+ u'flour' u'butter' u'dough' u'recip' u'bake' u'sugar' u'cup']
+
+ For Centroid  bodies   8  keywords are  [u'time' u'food' u'world' u'technolog' u'game' u'make' u'year' u'use'
+ u'like' u'new' u'news' u'ha' u'sport' u'recip' u'wa']
+
+ For Centroid  bodies   9  keywords are  [u'comic' u'break' u'var' u'game' u'static' u'media' u'true' u'http' u'pic'
+ u'imag' u'clip' u'pictur' u'humor' u'funni' u'video']
