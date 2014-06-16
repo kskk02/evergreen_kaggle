@@ -32,6 +32,8 @@ from nltk.stem.porter import PorterStemmer
 from nltk.corpus import wordnet
 from sklearn import metrics
 from sklearn.metrics import mean_squared_error
+
+
 # general strategy -
 # Assumptions:
 # 1. Text is the only valuable info that defines evergreen.
@@ -50,7 +52,7 @@ def IsEnglish (word):
 
 def StringCleanUp (text):
 # this function takes an entire review (multiple sentences) and returns back a modified sentence that only contains words (alphabets)
-# and english language words only
+# and english language words only. It also stems any word.
   if text == None:
     return " "
   stemmer = PorterStemmer()
@@ -61,15 +63,11 @@ def StringCleanUp (text):
   return restored_text
 
 
-def top10words_cluster (df,column,num_of_clusters) :
-
-    input_vectorizer = TfidfVectorizer(stop_words='english')
-    X_train = input_vectorizer.fit_transform(df[column])
+def top10words_cluster (input_vectorizer,km, df,column,num_of_clusters) :
+    X_train = input_vectorizer.transform(df.bodies)
     vocab = input_vectorizer.get_feature_names()
-
     sse_err = []
     k=num_of_clusters
-    km = KMeans(n_clusters=k, init='k-means++', max_iter=100, n_init=1)
     res = km.fit(X_train)
     x = X_train.toarray()
     SSE = mean_squared_error(res.cluster_centers_[res.labels_],x)
@@ -82,77 +80,72 @@ def top10words_cluster (df,column,num_of_clusters) :
     cluster_centers = np.array(res.cluster_centers_)
     sorted_vals = [res.cluster_centers_[i].argsort() for i in range(0,np.shape(res.cluster_centers_)[0])]
 
-    threshold = 0.01
     for i in xrange(len(res.cluster_centers_)):
         words=vocab[sorted_vals[i][-10:]]
         print "\n For Centroid ",i," keywords are ", words
-    return res.labels_        
+    return res.labels_
 
+def DataBreakUp(datas):
+    datas = datas.apply(json.loads)   
+    keywords  = [StringCleanUp(datas[i]["url"])  if "url" in datas[i] else "NO DATA" for i in range(0,len(datas)) ]
+    bodies  = [StringCleanUp(datas[i]["body"])  if "body" in datas[i] else "NO DATA" for i in range(0,len(datas)) ]
+    titles  = [StringCleanUp(datas[i]["title"])  if "title" in datas[i] else "NO DATA" for i in range(0,len(datas)) ]
+    datas=pd.DataFrame(datas)
+    datas["bodies"]=bodies
+    datas["keywords"]=keywords
+    datas["titles"]=titles
+    return datas
 
 
 # Display progress logs on stdout
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(message)s')
+#logging.basicConfig(level=logging.INFO,
+#                    format='%(asctime)s %(levelname)s %(message)s')
 
 df = pd.read_table('data/train.tsv')
-data = df.boilerplate[0:30]
-data = data.apply(json.loads)   
+data = df.boilerplate
 label = df.iloc[:,26]
-    
-keywords  = [StringCleanUp(data[i]["url"])  if "url" in data[i] else "NO DATA" for i in range(0,len(data)) ]
-bodies  = [StringCleanUp(data[i]["body"])  if "body" in data[i] else "NO DATA" for i in range(0,len(data)) ]
-titles  = [StringCleanUp(data[i]["title"])  if "title" in data[i] else "NO DATA" for i in range(0,len(data)) ]
-data=pd.DataFrame(data)
-data["bodies"]=bodies
-data["keywords"]=keywords
-data["titles"]=titles
-data["label"] = label
+testfile = pd.read_csv('./data/test.tsv', sep="\t", na_values=['?'])
+testdata = DataBreakUp(testfile.boilerplate)
+data = DataBreakUp(data)
+full_data = data.append(testdata)    
+num_of_clusters = 5
 
 
-alc_cat = pd.get_dummies(df.alchemy_category)
 
-full_data = pd.merge(df,alc_cat,right_index=True,left_index=True)
-correlations = full_data.corr()
-correlations.label
+#alc_cat = pd.get_dummies(df.alchemy_category)
 
-data["bodyCategory"] = top10words_cluster(data,"bodies",10)
-data["keywordsCategory"] = top10words_cluster(data,"keywords",10)
-data["titlesCategory"] = top10words_cluster(data,"bodies",10)
+#full_data = pd.merge(df,alc_cat,right_index=True,left_index=True)
+#correlations = full_data.corr()
+#correlations.label
+km_bodies = KMeans(n_clusters=num_of_clusters, init='k-means++', max_iter=100, n_init=1)
+input_vectorizer_bodies = TfidfVectorizer(stop_words='english')
+input_vectorizer_bodies.fit(full_data.bodies)
+
+
+km_keywords = KMeans(n_clusters=num_of_clusters, init='k-means++', max_iter=100, n_init=1)
+km_titles = KMeans(n_clusters=num_of_clusters, init='k-means++', max_iter=100, n_init=1)
+
+
+
+full_data["bodyCategory"] = top10words_cluster(input_vectorizer_bodies,km_bodies,full_data,"bodies",num_of_clusters)
+#full_data["bodyCategory"] = top10words_cluster(input_vectorizer_bodies,km_bodies,full_data,"bodies",num_of_clusters)
+#data["keywordsCategory"] = top10words_cluster(km_keywords,data,"keywords",num_of_clusters)
+#data["titlesCategory"] = top10words_cluster(km_titles,data,"titles",num_of_clusters)
 
 # now binarize and perform correlation with label
-temp =  pd.get_dummies(data.bodyCategory,prefix="body")
-data = pd.merge(data,temp,right_index=True,left_index=True)
-temp =  pd.get_dummies(data.keywordsCategory,prefix="keywords")
-data = pd.merge(data,temp,right_index=True,left_index=True)
-temp =  pd.get_dummies(data.titlesCategory,prefix="titles")
-data = pd.merge(data,temp,right_index=True,left_index=True)
+body =  pd.get_dummies(full_data.bodyCategory,prefix="body")
+#body = pd.merge(data.bodies,body,right_index=True,left_index=True)
+##keywords =  pd.get_dummies(data.keywordsCategory,prefix="keywords")
+#data = pd.merge(data,temp,right_index=True,left_index=True)
+##titles =  pd.get_dummies(data.titlesCategory,prefix="titles")
+#data = pd.merge(data,temp,right_index=True,left_index=True)
 
-print data.corr().label
-
-###############################################################################
-# define a pipeline combining a text feature extractor with a simple
-# classifier
-pipeline = Pipeline([
-    ('vect', CountVectorizer()),
-    ('tfidf', TfidfTransformer()),
-    ('clf', LogisticRegression()),
-])
-
-parameters = {
-    'vect__max_df': (0.5 ),#, 0.75, 1.0),
-    'vect__max_features': (None), #, 5000, 10000, 50000),
-    'vect__ngram_range': ((1, 1), (1, 2)),  # unigrams or bigrams
-    #'tfidf__use_idf': (True, False),
-  #  'tfidf__norm': ('l1', 'l2'),
- #   'clf__alpha': (0.0001,0.00001, 0.000001),
-#    'clf__penalty': ('l2', 'elasticnet'),
-    #'clf__n_iter': (10, 50, 80),
-}
+#print data.corr().label
 
 
-traindata = data.keywords
-testdata = list(np.array(p.read_table('./data/test.tsv'))[:,2])
-y = np.array(p.read_table('./data/train.tsv'))[:,-1]
+
+#X_train = input_vectorizer.fit_transform()
+
 
 tfv = TfidfVectorizer(min_df=3,  max_features=None, strip_accents='unicode',  
     analyzer='word',token_pattern=r'\w{1,}',ngram_range=(1, 2), use_idf=1,smooth_idf=1,sublinear_tf=1)
@@ -161,48 +154,68 @@ rd = lm.LogisticRegression(penalty='l2', dual=True, tol=0.0001,
                          C=1, fit_intercept=True, intercept_scaling=1.0, 
                          class_weight=None, random_state=None)
 
-X_all = traindata + testdata
-lentrain = len(traindata)
-
-print "fitting pipeline"
-tfv.fit(X_all)
-print "transforming data"
-X_all = tfv.transform(X_all)
-
-X = X_all[:lentrain]
-X_test = X_all[lentrain:]
 
 
 
-xtrain, xtest, ytrain, ytest = cross_validation.train_test_split(extract, label, test_size=0.15, random_state=42)
+###############################################################################
+# define a pipeline combining a text feature extractor with a simple
+# classifier
+pipeline = Pipeline([
+    ('vect', tfv),
+    ('clf', rd),
+])
 
-grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1, scoring="roc_auc")
+parameters = {
+    'vect__max_df': (0.5, 0.75, 1.0),
+  #  'vect__max_features': (None, 5000),#, 10000, 50000),
+    'vect__ngram_range': ((1, 1), (1, 2)),  # unigrams or bigrams
+    #'tfidf__use_idf': (True, False),
+ #   'vect__norm': ('l1', 'l2'),
+#    'clf__alpha': (0.0001,0.00001, 0.000001),
+ #   'clf__penalty': ('l2', 'elasticnet'),
+    #'clf__n_iter': (10, 50, 80),
+}
 
-print("Performing grid search...")
-print("pipeline:", [name for name, _ in pipeline.steps])
-print("parameters:")
-pprint(parameters)
-t0 = time()
-grid_search.fit(xtrain, ytrain)
-print("done in %0.3fs" % (time() - t0))
-print()
 
 
 
-print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, X, y, cv=20, scoring='roc_auc'))
+print "fitting pipeline"
+vect = tfv.fit_transform(full_data.bodies)
+vect = np.hstack((vect.toarray(),body.values))
 
-print "training on full data"
-rd.fit(X,y)
-pred = rd.predict_proba(X_test)[:,1]
-testfile = p.read_csv('./data/test.tsv', sep="\t", na_values=['?'], index_col=1)
-pred_df = p.DataFrame(pred, index=testfile.index, columns=['label'])
+xtrain_bod, xtest_bod, ytrain_bod, ytest_bod = cross_validation.train_test_split(vect[0:len(label)], label, test_size=0.15, random_state=42)
+#xtrain_key, xtest_key, ytrain_key, ytest_key = cross_validation.train_test_split(data.keywords, label, test_size=0.15, random_state=42)
+#xtrain_tit, xtest_tit, ytrain_tit, ytest_tit = cross_validation.train_test_split(data.titles, label, test_size=0.15, random_state=42)
+
+
+rd.fit(xtrain_bod,ytrain_bod)
+print rd.score(xtest_bod,ytest_bod)
+
+pred = rd.predict_proba(vect[len(label):])[:,1]
+
+grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1, scoring="roc_auc", cv=5)
+
+#print("pipeline:", [name for name, _ in pipeline.steps])
+#print("parameters:")
+#pprint(parameters)
+#t0 = time()
+#grid_search.fit(xtrain_bod, ytrain_bod)
+#print("done in %0.3fs" % (time() - t0))
+
+#print("Best score: %0.3f" % grid_search.best_score_)
+#print("Best parameters set:")
+#best_parameters = grid_search.best_estimator_.get_params()
+#for param_name in sorted(parameters.keys()):
+#    print("\t%s: %r" % (param_name, best_parameters[param_name]))
+
+
+
+#print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, xtest_bod,ytest_bod, cv=20, scoring='roc_auc'))
+
+
+pred_df = p.DataFrame(pred, index=testfile.urlid, columns=['label'])
 pred_df.to_csv('./data/benchmark.csv')
 print "submission file created.."
-
-
-
-print correlations.label
-
 
 
 
